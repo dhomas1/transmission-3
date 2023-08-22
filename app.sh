@@ -87,7 +87,7 @@ _download_xz "${FILE}" "${URL}" "${FOLDER}"
 pushd "target/${FOLDER}"
 PKG_CONFIG_PATH="${DEST}/lib/pkgconfig" \
   ./configure --host="${HOST}" --prefix="${DEST}" \
-  --enable-nls --enable-cli --enable-daemon --enable-utp \
+  --disable-nls --disable-gtk --enable-cli --enable-daemon --enable-utp \
   --with-zlib="${DEPS}"
 make -j1
 make -j1 install
