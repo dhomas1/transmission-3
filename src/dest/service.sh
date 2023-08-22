@@ -7,7 +7,7 @@
 
 framework_version="2.1"
 name="transmission"
-version="2.92-1"
+version="3.00"
 description="A fast, easy, and free BitTorrent client"
 depends=""
 webui="WebUI"
