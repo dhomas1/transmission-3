@@ -62,7 +62,7 @@ popd
 
 ### LIBEVENT ###
 _build_libevent() {
-local VERSION="2.1.22-stable"
+local VERSION="2.1.12-stable"
 local FOLDER="libevent-${VERSION}"
 local FILE="${FOLDER}.tar.gz"
 local URL="https://github.com/libevent/libevent/releases/download/release-${VERSION}/${FILE}"
