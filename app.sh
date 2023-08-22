@@ -49,7 +49,7 @@ local FILE="curl-${VERSION}.tar.gz"
 local URL="https://github.com/curl/curl/releases/download/${FOLDER}/${FILE}"
 
 _download_tgz "${FILE}" "${URL}" "${FOLDER}"
-pushd "target/${FOLDER}"
+pushd "target/curl-${version}"
 ./configure --host="${HOST}" --prefix="${DEPS}" \
   --libdir="${DEST}/lib" --disable-static \
   --disable-debug --disable-curldebug \
