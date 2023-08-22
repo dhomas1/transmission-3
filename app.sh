@@ -1,6 +1,6 @@
 ### ZLIB ###
 _build_zlib() {
-local VERSION="1.2.8"
+local VERSION="1.3"
 local FOLDER="zlib-${VERSION}"
 local FILE="${FOLDER}.tar.gz"
 local URL="http://zlib.net/${FILE}"
@@ -15,15 +15,13 @@ popd
 
 ### OPENSSL ###
 _build_openssl() {
-local VERSION="1.0.2d"
+local VERSION="1.1.1u"
 local FOLDER="openssl-${VERSION}"
 local FILE="${FOLDER}.tar.gz"
-local URL="http://mirror.switch.ch/ftp/mirror/openssl/source/old/1.0.2/${FILE}"
+local URL="http://www.openssl.org/source/${FILE}"
 
 _download_tgz "${FILE}" "${URL}" "${FOLDER}"
-cp -vf "src/${FOLDER}-parallel-build.patch" "target/${FOLDER}/"
 pushd "target/${FOLDER}"
-patch -p1 -i "${FOLDER}-parallel-build.patch"
 ./Configure --prefix="${DEPS}" --openssldir="${DEST}/etc/ssl" \
   zlib-dynamic --with-zlib-include="${DEPS}/include" --with-zlib-lib="${DEPS}/lib" \
   shared threads linux-armv4 -DL_ENDIAN ${CFLAGS} ${LDFLAGS} \
@@ -31,9 +29,11 @@ patch -p1 -i "${FOLDER}-parallel-build.patch"
 sed -i -e "s/-O3//g" Makefile
 make
 make install_sw
+mkdir -p "${DEST}/libexec"
+cp -vfa "${DEPS}/bin/openssl" "${DEST}/libexec/"
 cp -vfa "${DEPS}/lib/libssl.so"* "${DEST}/lib/"
 cp -vfa "${DEPS}/lib/libcrypto.so"* "${DEST}/lib/"
-cp -vfaR "${DEPS}/lib/engines" "${DEST}/lib/"
+cp -vfaR "${DEPS}/lib/engines"* "${DEST}/lib/"
 cp -vfaR "${DEPS}/lib/pkgconfig" "${DEST}/lib/"
 rm -vf "${DEPS}/lib/libcrypto.a" "${DEPS}/lib/libssl.a"
 sed -e "s|^libdir=.*|libdir=${DEST}/lib|g" -i "${DEST}/lib/pkgconfig/libcrypto.pc"
@@ -43,10 +43,10 @@ popd
 
 ### CURL ###
 _build_curl() {
-local VERSION="7.48.0"
-local FOLDER="curl-${VERSION}"
-local FILE="${FOLDER}.tar.gz"
-local URL="http://curl.haxx.se/download/${FILE}"
+local VERSION="8.2.1"
+local FOLDER="curl-8_2_1"
+local FILE="curl-${VERSION}.tar.gz"
+local URL="https://github.com/curl/curl/releases/download/${FOLDER}/${FILE}"
 
 _download_tgz "${FILE}" "${URL}" "${FOLDER}"
 pushd "target/${FOLDER}"
@@ -62,7 +62,7 @@ popd
 
 ### LIBEVENT ###
 _build_libevent() {
-local VERSION="2.0.22-stable"
+local VERSION="2.1.22-stable"
 local FOLDER="libevent-${VERSION}"
 local FILE="${FOLDER}.tar.gz"
 local URL="https://github.com/libevent/libevent/releases/download/release-${VERSION}/${FILE}"
@@ -78,10 +78,10 @@ popd
 
 ### TRANSMISSION ###
 _build_transmission() {
-local VERSION="2.92"
+local VERSION="3.00"
 local FOLDER="transmission-${VERSION}"
 local FILE="${FOLDER}.tar.xz"
-local URL="https://transmission.cachefly.net/${FILE}"
+local URL="https://github.com/transmission/transmission/releases/download/${VERSION}/${FILE}"
 
 _download_xz "${FILE}" "${URL}" "${FOLDER}"
 pushd "target/${FOLDER}"
