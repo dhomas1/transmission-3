@@ -1,10 +1,10 @@
 # transmission
 
-This is a set of scripts to package a DroboApp from scratch, i.e., download sources, unpackage, compile, install, and package in a TGZ file. The `master` branch contains the Drobo5N version, the `drobofs` branch contains the DroboFS version.
+This is a set of scripts to package a DroboApp from scratch, i.e., download sources, unpackage, compile, install, and package in a TGZ file. 
 
 ## I just want to install the DroboApp, what do I do?
 
-Check the [releases](https://github.com/droboports/transmission/releases) page. If there are no releases available, then you have to compile.
+Check the [releases](https://github.com/dhomas1/transmission-3/releases) page. If there are no releases available, then you have to compile.
 
 ## How to compile
 
@@ -13,7 +13,7 @@ First make sure that you have a [working cross-compiling VM](https://github.com/
 Log in the VM, pick a temporary folder (e.g., `~/build`), and then do:
 
 ```
-git clone https://github.com/droboports/transmission.git
+git clone https://github.com/dhomas1/transmission-3.git
 cd transmission
 ./build.sh
 ls -la *.tgz
@@ -29,7 +29,7 @@ Each invocation creates a log file with all the generated output.
 
 * zlib: http://zlib.net/
 * openssl: http://www.openssl.org/
-* curl: http://curl.haxx.se/
+* curl: http://github.com/curl
 * libevent: http://libevent.org/
 * transmission: https://www.transmissionbt.com/
 
